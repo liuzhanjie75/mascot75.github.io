@@ -1,0 +1,791 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next gemini use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="-java -函数式," />
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="第一次写作。这几天看了java8实战，感觉有必要写写！  java演变自1996年JDK（1.0）发布以来，Java已经受到了学生、项目经理和 程序员等一大批活跃的用户的欢迎。这一语言极富活力，不断被用在大大小小的项目里。从Java1.1（1997）年一直到Java7（2011）年，Java通过增加新功能，不断得到良好的升级。Java8则是在2014年3月发布的，其中带来了很多新功能，其中ja">
+<meta name="keywords" content="-java -函数式">
+<meta property="og:type" content="article">
+<meta property="og:title" content="java学习笔记(一)">
+<meta property="og:url" content="http://yoursite.com/2018/09/09/java学习笔记-一/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="第一次写作。这几天看了java8实战，感觉有必要写写！  java演变自1996年JDK（1.0）发布以来，Java已经受到了学生、项目经理和 程序员等一大批活跃的用户的欢迎。这一语言极富活力，不断被用在大大小小的项目里。从Java1.1（1997）年一直到Java7（2011）年，Java通过增加新功能，不断得到良好的升级。Java8则是在2014年3月发布的，其中带来了很多新功能，其中ja">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2018-09-10T15:03:16.362Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="java学习笔记(一)">
+<meta name="twitter:description" content="第一次写作。这几天看了java8实战，感觉有必要写写！  java演变自1996年JDK（1.0）发布以来，Java已经受到了学生、项目经理和 程序员等一大批活跃的用户的欢迎。这一语言极富活力，不断被用在大大小小的项目里。从Java1.1（1997）年一直到Java7（2011）年，Java通过增加新功能，不断得到良好的升级。Java8则是在2014年3月发布的，其中带来了很多新功能，其中ja">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Gemini',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: 'Author'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2018/09/09/java学习笔记-一/"/>
+
+
+
+
+
+  <title>java学习笔记(一) | Hexo</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Hexo</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/about.md" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/tags.md" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/categories.md" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-commonweal">
+          <a href="/404.html" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-heartbeat"></i> <br />
+            
+            公益404
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/09/09/java学习笔记-一/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="mascot">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Hexo">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">java学习笔记(一)</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-09-09T15:18:37+08:00">
+                2018-09-09
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/java-函数式编程/" itemprop="url" rel="index">
+                    <span itemprop="name">-java -函数式编程</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <blockquote>
+<p> 第一次写作。这几天看了java8实战，感觉有必要写写！</p>
+</blockquote>
+<h2 id="java演变"><a href="#java演变" class="headerlink" title="java演变"></a>java演变</h2><p>自1996年JDK（1.0）发布以来，Java已经受到了学生、项目经理和 程序员等一大批活跃的用户的欢迎。这一语言极富活力，不断被用在大大小小的项目里。从Java1.1（1997）年一直到Java7（2011）年，Java通过增加新功能，不断得到良好的升级。Java8则是在2014年3月发布的，其中带来了很多新功能，其中java函数式编程就是其中的重大变革。</p>
+<a id="more"></a>
+<h2 id="什么是函数式编程"><a href="#什么是函数式编程" class="headerlink" title="什么是函数式编程"></a>什么是函数式编程</h2><p>编程语言中的函数通常指的是方法 ，尤其是静态方法；这是在数学函数之外的新含义。在谈到java8的函数时，这两种用法几乎是一致的。在众多的函数式编程语言中，函数是作为一等公民（一等值），而编译语言则把方法看成二等公民。这种改变在Scala和Groovy等语言的实践以证明，让方法等概念作为一等值可以扩充程序员的工具库，从而让编程变得更容易。</p>
+<h2 id="java8带来的改变"><a href="#java8带来的改变" class="headerlink" title="java8带来的改变"></a>java8带来的改变</h2><p>java8之前java的命令式编程是很啰嗦的，例如对inventory中的苹果按照重量进行排序。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">Collections.sort(inventory, <span class="keyword">new</span> Comparator&lt;Apple&gt;()&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">compare</span><span class="params">(Apple a1, Apple a2)</span></span>&#123;</span><br><span class="line">        retuen a1.getWeight().comapreTo(a2.getWeright());</span><br><span class="line">    &#125; </span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+<p>在Java8里面，你可以写出的更简洁代码，代码读起来更接近问题的描述。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">inventory.sort(comparing(Apple::getWeight()));</span><br></pre></td></tr></table></figure>
+<p>这一行代码就把问题描述得很清晰，没有大量的模板代码，使代码更接近问题的本身。同时也大大增加了可读性和提高了编写代码的效率。你现在是不是很心动了？这只是刚刚开始而已！</p>
+<p>下面让我们继续对比Java8究竟给我们带来了哪些改变，例如我们想筛选一个目录中的隐藏文件，需要编写如下代码</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">File[] files = <span class="keyword">new</span> File(<span class="string">"."</span>).listFiles(<span class="keyword">new</span> FileFilter() &#123;</span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">boolean</span> <span class="title">accept</span><span class="params">(File pathname)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> pathname.isHidden();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+<p>虽然只用了三行代码，但却比较的绕，不够接近问题的实质。现在Java8你可以把代码重构成下面这样：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">File[] files = <span class="keyword">new</span> File(<span class="string">"."</span>).listFiles(File::isHidden);</span><br></pre></td></tr></table></figure>
+<p>是不是很简单，在File类已有isHidden函数的条件下我们只需要用Java8的方法引用 :: 语法（即 “把这个方法作为函数参数”）就能达到我们的目的。</p>
+<p>除了允许命名函数成为一等值以外，Java8还允许将更广义的函数作为值，包括匿名函数（lambda）。例如，你可以这样写：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">（<span class="keyword">int</span> x) -&gt; x + <span class="number">1</span>;</span><br></pre></td></tr></table></figure>
+<p>调用时给定参数x，就会返回x + 1的函数值。匿名函数使函数式编程更简洁，可以不必为简单的需求而编s写一个方法。这样就很方便我们编写可读性强的代码。</p>
+<p>下面继续看一个代码传递的例子。现在有一个筛选绿色苹果的需求，通常会写出一个filterGreenApples的方法：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> List&lt;Apple&gt; <span class="title">filterGreenApples</span><span class="params">(List&lt;Apple&gt; apples)</span> </span>&#123;</span><br><span class="line">    List&lt;Apple&gt; result = <span class="keyword">new</span> ArrayList&lt;&gt;();</span><br><span class="line">    <span class="keyword">for</span> (Apple apple : apples) &#123;</span><br><span class="line">        <span class="keyword">if</span> (<span class="string">"green"</span>.equals(apple.getColor())) &#123;</span><br><span class="line">            result.add(apple);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> result;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>这些代码很简单。如果现在改一下需求，需要选出重量超过150克的苹果，甚至都不用思考，立马就可以想到filterHeavyApples方法：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> List&lt;Apple&gt; <span class="title">filterHeavyApples</span><span class="params">(List&lt;Apple&gt; apples)</span> </span>&#123;</span><br><span class="line">    List&lt;Apple&gt; result = <span class="keyword">new</span> ArrayList&lt;&gt;();</span><br><span class="line">    <span class="keyword">for</span> (Apple apple : apples) &#123;</span><br><span class="line">        <span class="keyword">if</span> (apple.getWeight() &gt; <span class="number">150</span>) &#123;</span><br><span class="line">            result.add(apple);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> result;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>你或许会复制粘贴，这两个方法除了 if 语句以外其他都是相同的。在软件工程中我们都知道重复代码是一个非常危险的信号，这个坏代码的味道会使你代码腐败的前奏。到这里你或许已经想到了利用设计模式中的模板方法解决，但是模板方法需要用多态才能完成方法重载。这在Java8以前是必须的，但是Java8以后，可以把条件代码作为参数传递进去，这就可以避免filter方法里面的重复代码，现在可以写：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">boolean</span> <span class="title">isGreenApple</span><span class="params">(Apple apple)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="string">"green"</span>.equals(apple.getColor());</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">boolean</span> <span class="title">isHeavyApple</span><span class="params">(Apple apple)</span> </span>&#123;</span><br><span class="line">     <span class="keyword">return</span> apple.getWeight() &gt; <span class="number">150</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> List&lt;Apple&gt; <span class="title">filterApples</span><span class="params">(List&lt;Apple&gt; apples, Predicate&lt;Apple&gt; predicate)</span> </span>&#123;</span><br><span class="line">    List&lt;Apple&gt; result = <span class="keyword">new</span> ArrayList&lt;&gt;();</span><br><span class="line">    <span class="keyword">for</span> (Apple apple : apples) &#123;</span><br><span class="line">        <span class="keyword">if</span> (predicate.test(apple)) &#123;</span><br><span class="line">            result.add(apple);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;    </span><br><span class="line">    <span class="keyword">return</span> result;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">List&lt;Apple&gt; greenApples = filterApples(apples, FilterApples::isGreenApple);</span><br><span class="line"></span><br><span class="line">List&lt;Apple&gt; heavyApples = filterApples(apples, FilterApples::isHeavyApple);</span><br></pre></td></tr></table></figure>
+<p>这可能已经注意到filter方法里面的参数Predicate<apple>，这便是Java8里面新加的函数式接口。这是一个谓词，谓词（predicate）在数学上常常用来代表一个类似函数的东西，它接受一个参数值，并返回true或false。Java8已经定义了Predicate函数式接口，我们现在只需要导入便可，暂时不需要考虑是如何实现的。就是这个神奇的魔法使得现在Java也可以传递代码块作为参数，这就很好的解决了重复代码的问题。</apple></p>
+<p>Java8的新特性不仅仅只有这些，通过上面的陈述，也算是基本入门了Java8的函数式编程。这只是我的一点点感悟！第一次写作，受限于本人水平有限，如有不妥，还望见谅。</p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/java-函数式/" rel="tag"># -java -函数式</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/09/04/hello-world/" rel="next" title="Hello World">
+                <i class="fa fa-chevron-left"></i> Hello World
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <p class="site-author-name" itemprop="name">mascot</p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">2</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                
+                  <span class="site-state-item-count">1</span>
+                  <span class="site-state-item-name">分类</span>
+                
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                
+                  <span class="site-state-item-count">1</span>
+                  <span class="site-state-item-name">标签</span>
+                
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="https://github.com/mascot75" target="_blank" title="GitHub">
+                      
+                        <i class="fa fa-fw fa-github"></i>GitHub</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="mailto:liuzhanjie75@gmail.com" target="_blank" title="E-Mail">
+                      
+                        <i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#java演变"><span class="nav-number">1.</span> <span class="nav-text">java演变</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#什么是函数式编程"><span class="nav-number">2.</span> <span class="nav-text">什么是函数式编程</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#java8带来的改变"><span class="nav-number">3.</span> <span class="nav-text">java8带来的改变</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2018</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">mascot</span>
+
+  
+</div>
+
+
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Gemini</a> v5.1.4</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
