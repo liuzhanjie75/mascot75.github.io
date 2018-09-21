@@ -68,7 +68,7 @@
 
 
 
-  <meta name="keywords" content="Hexo, NexT" />
+  <meta name="keywords" content="-java -函数式," />
 
 
 
@@ -79,17 +79,18 @@
 
 
 
-<meta name="description" content="Welcome to Hexo! This is your very first post. Check documentation for more info. If you get any problems when using Hexo, you can find the answer in troubleshooting or you can ask me on GitHub.">
+<meta name="description" content="前一篇简单的介绍了Java8函数式编程，这篇还将继续函数式编程之旅。  流在Java程序中制造和处理集合几乎是必然的, 但是使用集合框架的效果并不理想. 例如: 你需要从列表中筛选出金额较高的交易, 然后按货币分组. 你可能需要写一堆格式化的代码:">
+<meta name="keywords" content="-java -函数式">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Hello World">
-<meta property="og:url" content="http://yoursite.com/2018/09/04/hello-world/index.html">
+<meta property="og:title" content="java学习笔记(二)">
+<meta property="og:url" content="http://yoursite.com/2018/09/11/java学习笔记-二/index.html">
 <meta property="og:site_name" content="Hexo">
-<meta property="og:description" content="Welcome to Hexo! This is your very first post. Check documentation for more info. If you get any problems when using Hexo, you can find the answer in troubleshooting or you can ask me on GitHub.">
+<meta property="og:description" content="前一篇简单的介绍了Java8函数式编程，这篇还将继续函数式编程之旅。  流在Java程序中制造和处理集合几乎是必然的, 但是使用集合框架的效果并不理想. 例如: 你需要从列表中筛选出金额较高的交易, 然后按货币分组. 你可能需要写一堆格式化的代码:">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2018-09-10T00:29:46.789Z">
+<meta property="og:updated_time" content="2018-09-21T14:43:29.483Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Hello World">
-<meta name="twitter:description" content="Welcome to Hexo! This is your very first post. Check documentation for more info. If you get any problems when using Hexo, you can find the answer in troubleshooting or you can ask me on GitHub.">
+<meta name="twitter:title" content="java学习笔记(二)">
+<meta name="twitter:description" content="前一篇简单的介绍了Java8函数式编程，这篇还将继续函数式编程之旅。  流在Java程序中制造和处理集合几乎是必然的, 但是使用集合框架的效果并不理想. 例如: 你需要从列表中筛选出金额较高的交易, 然后按货币分组. 你可能需要写一堆格式化的代码:">
 
 
 
@@ -119,13 +120,13 @@
 
 
 
-  <link rel="canonical" href="http://yoursite.com/2018/09/04/hello-world/"/>
+  <link rel="canonical" href="http://yoursite.com/2018/09/11/java学习笔记-二/"/>
 
 
 
 
 
-  <title>Hello World | Hexo</title>
+  <title>java学习笔记(二) | Hexo</title>
   
 
 
@@ -272,7 +273,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/09/04/hello-world/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/09/11/java学习笔记-二/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="mascot">
@@ -289,7 +290,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">Hello World</h1>
+          <h1 class="post-title" itemprop="name headline">java学习笔记(二)</h1>
         
 
         <div class="post-meta">
@@ -301,8 +302,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-09-04T13:38:05+08:00">
-                2018-09-04
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-09-11T21:02:52+08:00">
+                2018-09-11
               </time>
             
 
@@ -311,6 +312,28 @@
             
           </span>
 
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/java-函数式编程/" itemprop="url" rel="index">
+                    <span itemprop="name">-java -函数式编程</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
           
 
           
@@ -339,16 +362,34 @@
       
 
       
-        <p>Welcome to <a href="https://hexo.io/" target="_blank" rel="noopener">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/" target="_blank" rel="noopener">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html" target="_blank" rel="noopener">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues" target="_blank" rel="noopener">GitHub</a>.</p>
+        <blockquote>
+<p>前一篇简单的介绍了Java8函数式编程，这篇还将继续函数式编程之旅。</p>
+</blockquote>
+<h2 id="流"><a href="#流" class="headerlink" title="流"></a>流</h2><p>在Java程序中制造和处理集合几乎是必然的, 但是使用集合框架的效果并不理想. 例如: 你需要从列表中筛选出金额较高的交易, 然后按货币分组. 你可能需要写一堆格式化的代码: </p>
 <a id="more"></a>
-<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo new <span class="string">"My New Post"</span></span><br></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/writing.html" target="_blank" rel="noopener">Writing</a></p>
-<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/server.html" target="_blank" rel="noopener">Server</a></p>
-<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/generating.html" target="_blank" rel="noopener">Generating</a></p>
-<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/deployment.html" target="_blank" rel="noopener">Deployment</a></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">Map&lt;Currency, List&lt;Transaction&gt; &gt; transactionByCurrencies = <span class="keyword">new</span> HashMap&lt;&gt;();</span><br><span class="line"><span class="keyword">for</span> (Transaction transaction : transactions) &#123;</span><br><span class="line">    <span class="keyword">if</span> (transaction.getPrise() &gt; <span class="number">1000</span>) &#123;</span><br><span class="line">         Currency currency = transaction.getCurrency();</span><br><span class="line">    	List&lt;Transaction&gt; transactionForcurrency = transactionByCurrencies.get(currency);</span><br><span class="line">    	<span class="keyword">if</span> ( transactionForcurrency = <span class="keyword">null</span>) &#123;</span><br><span class="line">         	transactionForcurrency = <span class="keyword">new</span> ArrayList&lt;&gt;();</span><br><span class="line">         	transactionBycurrency.put(currency,  transactionForcurrency);</span><br><span class="line">    	&#125;</span><br><span class="line">     	transactionForcurrency.add(transaction);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>  我们很难一眼看出这些代码做了什么, 嵌套的流程控制语句需要仔细地理解. </p>
+<p>如果你使用Java8的Stream API, 你的代码会简洁, 易于理解. </p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">Map&lt;Currency, List&lt;Transaction&gt; &gt; transactionByCurrencies = transactions.stream()</span><br><span class="line">	.filter((Transaction t) -&gt; t.getPise() &gt; <span class="number">1000</span>)</span><br><span class="line">	.collect(groupingBy(Transaction::getCurrency));</span><br></pre></td></tr></table></figure>
+<p>就是这么简单, 数据的处理全部交由函数库内部进行, 我们只需明确我们的动作即可. 这种思想叫做内部迭代, 和for-each的外部迭代是相对的. </p>
+<p>初步了解了Stream,  你会发现这和Java以前的IO流是有很大的不同的, 虽然都是流.  但是很明显Stream的流是更抽象的,  更高级的. </p>
+<h2 id="并行编程"><a href="#并行编程" class="headerlink" title="并行编程"></a>并行编程</h2><p>所有新式的笔记本和台式电脑都是多核的, 经典的Java编程是单线程(只利用一核)模式,  这样其他CPU资源就都浪费了. 通过Java提供的多线程框架来实现并发编程并非易事, 传统的synchronized, volatile关键字, Java5 之后提供的并发框架, 各种锁的区别, 对于一个新人这是很不友好的.  没有对Java内存模型和Java虚拟机有一定的了解是很难编写出正确的并发代码的. </p>
+<p>Java8的Stream API 提供的并行处理, 屏蔽了大量的底层细节, 程序员只需简单的调用parallelStream方法即可达到并行处理.  可以稍微感受一下Java8并行的的简单,  利用并行从一个列表中选出比较重的苹果.:</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">List&lt;Apple&gt; heavyApple = inventory.parallelStream().filter((Apple a) -&gt; a.getWeight() &gt; <span class="number">150</span>).collect(toList());</span><br></pre></td></tr></table></figure>
+<p>你或许会好奇并行编程会启动多少个线程? 并行流内部使用了默认的ForkJoinPool, 默认的线程数就是你的处理器个数, 这个值是由Runtime.getRuntime().availableProcessors()得到. 这个大小是可以改变的, 不过对于并发编程, 数据密集型建议线程数等于处理器数或处理器数加一, IO密集型的建议线程数是两倍与处理器数或加一.</p>
+<h2 id="默认方法"><a href="#默认方法" class="headerlink" title="默认方法"></a>默认方法</h2><p>Java8的默认方法主要是为了支持程序库设计人员, 让他们写出更容易改进的接口. 这也是为了提高兼容性, 在Java8 引入函数式编程后, 在Java8 之前的的许多函数库并没有提供函数式的支持. 例如, 集合框架中就没有stream方法, 但是你会发现之前的的代码都是调用的集合框架的stream方法. 那是因为在Collection<t> 接口中提供了默认实现. </t></p>
+<p>如果没有默认方法, 为了添加一个方法, 你可能需要为所有实现这个接口的类提供一个方法的实现, 并且实现的代码都是同一套.  那简直是噩梦.  你可能忍不住想放弃添加这个方法.  因此Java8 就提供了默认方法, 已解决扩充接口可能带来的既有代码的破坏. </p>
+<h2 id="其他的函数式思想"><a href="#其他的函数式思想" class="headerlink" title="其他的函数式思想"></a>其他的函数式思想</h2><p>常见的函数式语言, 如SML, OCaml, Haskell中还提供了其他的一些结构来帮助程序员避免描述性数据的null引用问题.  计算机科学巨擎之一 Tony Hoare 在2009年伦敦QCon上演讲说道：</p>
+<blockquote>
+<p>我把它叫作我的 “ 价值亿万美金的错误 ” 。就是在1965年发明了空值引用…….我无法抗拒放进一个空值引用的诱惑，仅仅是因为他实现起来非常容易。</p>
+</blockquote>
+<p>Java8 提供了Optional<t> 类，它是帮助你避免出现NullPointerException 。这是个容器对象，可以包含或不包含一个值。只是一个空值引用的解决方案之一。</t></p>
+<p>还有一种思想是模式匹配。举一个简单的例子，比如你要写一个Expr类型算术表达式的树的基本化简，使用Scala中你可以写出这样的代码：</p>
+<figure class="highlight scala"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">simplifyExpression</span></span>(expr: <span class="type">Expr</span>): <span class="type">Expr</span> = expr <span class="keyword">match</span> &#123;</span><br><span class="line">    <span class="keyword">case</span> <span class="type">BinOp</span>(<span class="string">"+"</span>, e, <span class="type">Number</span>(<span class="number">0</span>)) =&gt; e</span><br><span class="line">    <span class="keyword">case</span> <span class="type">BinOp</span>(<span class="string">"*"</span>, e, <span class="type">Number</span>(<span class="number">1</span>)) =&gt; e</span><br><span class="line">    <span class="keyword">case</span> <span class="type">BinOp</span>(<span class="string">"/"</span>, e, <span class="type">Number</span>(<span class="number">1</span>)) =&gt; e</span><br><span class="line">    <span class="keyword">case</span> _ =&gt; expr</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>Scala 语法里的expr match 和Java的switch差不多，不过Java的switch是不允许模式匹配的。或许你可以考虑使用Java的if-then-else来实现这个间的的程序，但那种方式更好，就属于语言的争论了。</p>
+<blockquote>
+<p>这只是简单的介绍一下Java8 的函数式编程，受困与本人的表达能力有限，有不妥之处，还望指正。</p>
+</blockquote>
 
       
     </div>
@@ -364,6 +405,12 @@
 
     <footer class="post-footer">
       
+        <div class="post-tags">
+          
+            <a href="/tags/java-函数式/" rel="tag"># -java -函数式</a>
+          
+        </div>
+      
 
       
       
@@ -373,15 +420,15 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
+              <a href="/2018/09/09/java学习笔记-一/" rel="next" title="java学习笔记(一)">
+                <i class="fa fa-chevron-left"></i> java学习笔记(一)
+              </a>
+            
           </div>
 
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2018/09/09/java学习笔记-一/" rel="prev" title="java学习笔记(一)">
-                java学习笔记(一) <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -529,7 +576,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Quick-Start"><span class="nav-number">1.</span> <span class="nav-text">Quick Start</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Create-a-new-post"><span class="nav-number">1.1.</span> <span class="nav-text">Create a new post</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Run-server"><span class="nav-number">1.2.</span> <span class="nav-text">Run server</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Generate-static-files"><span class="nav-number">1.3.</span> <span class="nav-text">Generate static files</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Deploy-to-remote-sites"><span class="nav-number">1.4.</span> <span class="nav-text">Deploy to remote sites</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#流"><span class="nav-number">1.</span> <span class="nav-text">流</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#并行编程"><span class="nav-number">2.</span> <span class="nav-text">并行编程</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#默认方法"><span class="nav-number">3.</span> <span class="nav-text">默认方法</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#其他的函数式思想"><span class="nav-number">4.</span> <span class="nav-text">其他的函数式思想</span></a></li></ol></div>
             
 
           </div>
