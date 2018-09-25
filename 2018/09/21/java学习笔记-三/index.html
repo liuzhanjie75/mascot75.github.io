@@ -1,0 +1,814 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next gemini use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="-java -函数式," />
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="简单的讲讲行为参数化传递代码，这也是Java8实战的第二章  应对不断变化的需求在软件工程中，一个从所周知的问题就是，不管你做什么，用户的需求总是会变的（PM的需求总是会变的）。编写能够应对变化需求的代码并不容易。行为参数化就是要帮助你处理频繁更变的需求的一种软件开发模式。一言以蔽之，它意味着拿出一个代码块，把它准备好却不去执行它。这个代码块以后可以被你程序的其他部分调用，这意味着你可以推迟这块">
+<meta name="keywords" content="-java -函数式">
+<meta property="og:type" content="article">
+<meta property="og:title" content="java学习笔记(三)">
+<meta property="og:url" content="http://yoursite.com/2018/09/21/java学习笔记-三/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="简单的讲讲行为参数化传递代码，这也是Java8实战的第二章  应对不断变化的需求在软件工程中，一个从所周知的问题就是，不管你做什么，用户的需求总是会变的（PM的需求总是会变的）。编写能够应对变化需求的代码并不容易。行为参数化就是要帮助你处理频繁更变的需求的一种软件开发模式。一言以蔽之，它意味着拿出一个代码块，把它准备好却不去执行它。这个代码块以后可以被你程序的其他部分调用，这意味着你可以推迟这块">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2018-09-25T15:14:02.373Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="java学习笔记(三)">
+<meta name="twitter:description" content="简单的讲讲行为参数化传递代码，这也是Java8实战的第二章  应对不断变化的需求在软件工程中，一个从所周知的问题就是，不管你做什么，用户的需求总是会变的（PM的需求总是会变的）。编写能够应对变化需求的代码并不容易。行为参数化就是要帮助你处理频繁更变的需求的一种软件开发模式。一言以蔽之，它意味着拿出一个代码块，把它准备好却不去执行它。这个代码块以后可以被你程序的其他部分调用，这意味着你可以推迟这块">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Gemini',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: 'Author'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2018/09/21/java学习笔记-三/"/>
+
+
+
+
+
+  <title>java学习笔记(三) | Hexo</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Hexo</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-commonweal">
+          <a href="/404.html" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-heartbeat"></i> <br />
+            
+            公益404
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/09/21/java学习笔记-三/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="mascot">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Hexo">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">java学习笔记(三)</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-09-21T22:47:23+08:00">
+                2018-09-21
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/java-函数式编程/" itemprop="url" rel="index">
+                    <span itemprop="name">-java -函数式编程</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <blockquote>
+<p>简单的讲讲行为参数化传递代码，这也是Java8实战的第二章</p>
+</blockquote>
+<h2 id="应对不断变化的需求"><a href="#应对不断变化的需求" class="headerlink" title="应对不断变化的需求"></a>应对不断变化的需求</h2><p>在软件工程中，一个从所周知的问题就是，不管你做什么，用户的需求总是会变的（PM的需求总是会变的）。编写能够应对变化需求的代码并不容易。行为参数化就是要帮助你处理频繁更变的需求的一种软件开发模式。一言以蔽之，它意味着拿出一个代码块，把它准备好却不去执行它。这个代码块以后可以被你程序的其他部分调用，这意味着你可以推迟这块代码的执行。例如，你可以将代码块作为参数传递给另外一个方法，稍后再去执行它。这样，这个方法的行为就基于那块代码被参数化了。</p>
+<a id="more"></a>
+<p>我们现在来看一个例子，查找库存中所有绿色苹果。</p>
+<h3 id="初试牛刀：筛选绿苹果"><a href="#初试牛刀：筛选绿苹果" class="headerlink" title="初试牛刀：筛选绿苹果"></a>初试牛刀：筛选绿苹果</h3><p>可能你选择最初的解决方案就是这样：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">private</span> <span class="keyword">static</span> List&lt;Apple&gt; <span class="title">filterGreenApples</span><span class="params">(List&lt;Apple&gt; apples)</span> </span>&#123;</span><br><span class="line">    List&lt;Apple&gt; result = <span class="keyword">new</span> ArrayList&lt;Apple&gt;();</span><br><span class="line">    <span class="keyword">for</span> (Apple apple : apples) &#123;</span><br><span class="line">        <span class="keyword">if</span> (<span class="string">"green"</span>.equals(apple.getColor())) &#123;</span><br><span class="line">            result.add(apple);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> result；</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>一个 if 语句就能达到我们想要的功能，如果现在还需要筛选红色的苹果呢？只需要简单的复制这个方法，改变函数名和 if 条件也能达到目的。但是如果要筛选各种颜色的苹果呢？你就需要考虑将其抽象化，以应变不断变化的需求。</p>
+<h3 id="再展身手：把颜色作为参数"><a href="#再展身手：把颜色作为参数" class="headerlink" title="再展身手：把颜色作为参数"></a>再展身手：把颜色作为参数</h3><p>给方法加一个颜色参数，这样就能适应变化了：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">private</span> <span class="keyword">static</span> List&lt;Apple&gt; <span class="title">filterApplesByColor</span><span class="params">(List&lt;Apple&gt; apples, String color)</span> </span>&#123;</span><br><span class="line">    List&lt;Apple&gt; result = <span class="keyword">new</span> ArrayList&lt;Apple&gt;();</span><br><span class="line">    <span class="keyword">for</span> (Apple apple : apples) &#123;</span><br><span class="line">        <span class="keyword">if</span> (color.equals(apple.getColor())) &#123;</span><br><span class="line">            result.add(apple);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> result;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>是不是比前面的简单了？但是现在有需要筛选重量超过150克的苹果，你会不假思索的写下：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">private</span> <span class="keyword">static</span> List&lt;Apple&gt; <span class="title">filterApplesByWeight</span><span class="params">(List&lt;Apple&gt; apples, <span class="keyword">int</span> weight)</span> </span>&#123;</span><br><span class="line">    List&lt;Apple&gt; result = <span class="keyword">new</span> ArrayList&lt;Apple&gt;();</span><br><span class="line">    <span class="keyword">for</span> (Apple apple : apples) &#123;</span><br><span class="line">        <span class="keyword">if</span> (apple.getWeight() &gt; weight) &#123;</span><br><span class="line">            result.add(apple);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> results;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>解决方法很简单，但是你复制了大部分的代码来实现遍历库存，并对每个苹果应用筛选条件。这样破坏了DRY(Don’t Repeat Yourself 不要重复自己)的软件工程原则。你需要考虑如何将颜色和重量结合成一个方法。</p>
+<h3 id="第三次尝试：对你能想到的每个属性做筛选"><a href="#第三次尝试：对你能想到的每个属性做筛选" class="headerlink" title="第三次尝试：对你能想到的每个属性做筛选"></a>第三次尝试：对你能想到的每个属性做筛选</h3><p>一个笨拙的尝试：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">private</span> <span class="keyword">static</span> List&lt;Apple&gt; <span class="title">filterApples</span><span class="params">(List&lt;Apple&gt; apples, String color, <span class="keyword">int</span> weight, <span class="keyword">boolean</span> flag)</span> </span>&#123;</span><br><span class="line">    List&lt;Apple&gt; result = <span class="keyword">new</span> ArrayList&lt;Apple&gt;();</span><br><span class="line">    <span class="keyword">for</span> (Apple apple : apples) &#123;</span><br><span class="line">        <span class="keyword">if</span> ((flag &amp;&amp; apple.getWeight() &gt; weight) || (!flag &amp;&amp; color.equals(apple.getColor())) &#123;</span><br><span class="line">            result.add(apple);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> result;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>这是个非常糟糕的解决方案，不明语义的 flag ，如果再增加属性，那又该怎么解决呢？需要组合筛选又怎么办呢？为了实现灵活的筛选，可以考虑如何将行为参数化。</p>
+<h2 id="行为参数化"><a href="#行为参数化" class="headerlink" title="行为参数化"></a>行为参数化</h2><p>现在需要一种比添加很多参数更好的方法来应对变化的需求。让我们退一步来看看更高层次的抽象。一种可能解决方案是对你的悬着标准建模：你考虑的是苹果，需要根据Apple的某些属性（比如它是绿色的吗？重量超过150克吗？）来返回一个布尔值。我们把它称为谓词。让我们定义一个接口来对选择标准建模：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">interface</span> <span class="title">ApplePredicate</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">boolean</span> <span class="title">test</span><span class="params">(Apple apple)</span></span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>这样就可以实现不同的选择标准了</p>
+<p>选绿色苹果：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">AppleGreenColorPredicate</span> <span class="keyword">implements</span> <span class="title">ApplePredicate</span> </span>&#123;</span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">boolean</span> <span class="title">test</span><span class="params">(Apple apple)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="string">"green"</span>.equals(apple.getColor());</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>选重的苹果：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">AppleHeavyWeightPredicate</span> <span class="keyword">implements</span> <span class="title">ApplePredicate</span> </span>&#123;</span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">boolean</span> <span class="title">test</span><span class="params">(Apple apple)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> apple.getWeight() &gt; <span class="number">150</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>你可以把这些标准看作 filter 方法的不同行为。这些和“策略设计模式”相关，它让你定义一族算法，把他们封装起来（称为“策略”），然后运行时选择一个算法。下面就是将filterApples方法让它接受一个ApplePredicate对象就可以了。</p>
+<h3 id="第四次尝试：-根据抽象条件筛选"><a href="#第四次尝试：-根据抽象条件筛选" class="headerlink" title="第四次尝试： 根据抽象条件筛选"></a>第四次尝试： 根据抽象条件筛选</h3><p>新的filterApples方法是这样的：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">private</span> <span class="keyword">static</span> List&lt;Apple&gt; <span class="title">filterApples</span><span class="params">(List&lt;Apple&gt; apples, ApplePredicate&lt;Apple&gt; applePredicate)</span> </span>&#123;</span><br><span class="line">    List&lt;Apple&gt; result = <span class="keyword">new</span> ArrayList&lt;&gt;();</span><br><span class="line">    <span class="keyword">for</span> (Apple apple : apples) &#123;</span><br><span class="line">        <span class="keyword">if</span> (applePredicate.test(apple)) &#123;</span><br><span class="line">            result.add(apple);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> appleList;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>现在代码已经灵活多了，读起来也很简单明了。现在你可以创建不同的ApplePredicate对象，并将它们传递给filterApples方法。这样就可以根据不同的条件来创建一个类并且实现ApplePredicate就可以了。</p>
+<p>选择红苹果：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">AppleRedAndHeavyPredicate</span> <span class="keyword">implements</span> <span class="title">ApplePredicate</span> </span>&#123;</span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">boolean</span> <span class="title">test</span><span class="params">(Apple apple)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="string">"red"</span>.equals(apple.getColor()) &amp;&amp; apple.getWeight() &gt; <span class="number">150</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">List&lt;Apple&gt; filterApples = filterApples(inventory, <span class="keyword">new</span> AppleRedAndHeavyPredicate());</span><br></pre></td></tr></table></figure>
+<p>现在filterApples方法的行为已经取决于通过ApplePredicate对象来实现了。这就是行为参数化了！行为参数化的好处在与你可以把迭代要筛选的集合的逻辑与对集合中每个元素应用的行为区分开来。这样你就可以重复使用同一个方法，给它不同的行为来达到不同的目的。</p>
+<p>但是很令人遗憾的是，filterApples方法只接受对象，你的代码必须包裹在对象里以内联的方式”传递代码“。你已经看见了，可以把行为抽象出来让你的代码适应需求变化，但这个过程很啰嗦。</p>
+<h2 id="对付啰嗦"><a href="#对付啰嗦" class="headerlink" title="对付啰嗦"></a>对付啰嗦</h2><p>现在当要把新行为传递给 filterApples 方法的时候，你不得不声明几个ApplePredicate接口的实现，然后实例化。这很浪费时间。有没有更简单的方式呢？Java 有一种匿名类的机制，你可以同时声明并实例化一个类。</p>
+<h3 id="第五次尝试：使用匿名类"><a href="#第五次尝试：使用匿名类" class="headerlink" title="第五次尝试：使用匿名类"></a>第五次尝试：使用匿名类</h3><p>下面是使用匿名类重筛选红苹果的例子：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">List&lt;Apple&gt; filterApples = filterApples(inventory, <span class="keyword">new</span> ApplePredicate()&#123;</span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">boolean</span> <span class="title">test</span><span class="params">(Apple apple)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="string">"red"</span>.equals(apple.getColor());</span><br><span class="line">    &#125;</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+<p>又进一步简化了，但是匿名类还是不够好。匿名类有些笨重，有着过多的模板代码。有时候会令人费解，这里就不举例子了。</p>
+<p>这里你是不是想到什么了，既然匿名类还不够简洁，那使用匿名表达式（lambda）呢？</p>
+<h3 id="第六次尝试：使用Lambda表达式"><a href="#第六次尝试：使用Lambda表达式" class="headerlink" title="第六次尝试：使用Lambda表达式"></a>第六次尝试：使用Lambda表达式</h3><p>使用lambda来简化代码，筛选红苹果：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">List&lt;Apple&gt; filterApples = filterApples(inventory, apple -&gt; <span class="string">"red"</span>.equals(apple.getColor());</span><br></pre></td></tr></table></figure>
+<p>通过Lambda的方式来筛选红苹果并且是重苹果：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">List&lt;Apple&gt; filterApples = filterApples(inventory, apple -&gt; <span class="string">"red"</span>.equals(apple.getColor()) &amp;&amp; apple.getWeight() &gt; <span class="number">150</span>);</span><br></pre></td></tr></table></figure>
+<p>不得不承认这代码已经很干净了，就只是简单的描述问题本身。现在我们可以在通往抽象的路上更进一步，就是把filterApples方法和ApplePredicate接口泛化，是他们不仅仅适用Apple。</p>
+<h3 id="第七次尝试：将-List-类型抽象化"><a href="#第七次尝试：将-List-类型抽象化" class="headerlink" title="第七次尝试：将 List 类型抽象化"></a>第七次尝试：将 List 类型抽象化</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">interface</span> <span class="title">Predicate</span>&lt;<span class="title">T</span>&gt;</span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">boolean</span> <span class="title">test</span><span class="params">(T t)</span></span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span>&lt;T&gt; List&lt;T&gt; <span class="title">filter</span><span class="params">(List&lt;T&gt; list， Predicate&lt;T&gt; p)</span> </span>&#123;</span><br><span class="line">    List&lt;T&gt; result = <span class="keyword">new</span> ArrayList&lt;&gt;();</span><br><span class="line">    <span class="keyword">for</span>(T e : list) &#123;</span><br><span class="line">        <span class="keyword">if</span>(p.test(e)) &#123;</span><br><span class="line">            result.add(e);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> result;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>现在你可以把 filter 方法用在香蕉，葡萄等水果和其他列表上了。这就是Java8 给我们带来的，灵活性和简洁性之间微妙的平衡点。</p>
+<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><ol>
+<li>行为参数化，就是一个方法接受多个不同的行为作为参数，并在内部使用它们，完成不同行为的能力。</li>
+<li>行为参数化可以让代码更好的适应不断变化的要求，减轻工作量。</li>
+<li>传递代码，就是将新行为作为参数传递给方法。但在Java8之前这实现起来很啰嗦。为接口生命许多只是用一次的实体类而造成的啰嗦代码，在Java8之前采用匿名类来减少。</li>
+<li>JavaAPI包含了很多可以用不同行为进行参数化的方法，包括排序、线程等。</li>
+</ol>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/java-函数式/" rel="tag"># -java -函数式</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/09/11/java学习笔记-二/" rel="next" title="java学习笔记(二)">
+                <i class="fa fa-chevron-left"></i> java学习笔记(二)
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <p class="site-author-name" itemprop="name">mascot</p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">4</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                
+                  <span class="site-state-item-count">1</span>
+                  <span class="site-state-item-name">分类</span>
+                
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                
+                  <span class="site-state-item-count">1</span>
+                  <span class="site-state-item-name">标签</span>
+                
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="https://github.com/mascot75" target="_blank" title="GitHub">
+                      
+                        <i class="fa fa-fw fa-github"></i>GitHub</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="mailto:liuzhanjie75@gmail.com" target="_blank" title="E-Mail">
+                      
+                        <i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#应对不断变化的需求"><span class="nav-number">1.</span> <span class="nav-text">应对不断变化的需求</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#初试牛刀：筛选绿苹果"><span class="nav-number">1.1.</span> <span class="nav-text">初试牛刀：筛选绿苹果</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#再展身手：把颜色作为参数"><span class="nav-number">1.2.</span> <span class="nav-text">再展身手：把颜色作为参数</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#第三次尝试：对你能想到的每个属性做筛选"><span class="nav-number">1.3.</span> <span class="nav-text">第三次尝试：对你能想到的每个属性做筛选</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#行为参数化"><span class="nav-number">2.</span> <span class="nav-text">行为参数化</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#第四次尝试：-根据抽象条件筛选"><span class="nav-number">2.1.</span> <span class="nav-text">第四次尝试： 根据抽象条件筛选</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#对付啰嗦"><span class="nav-number">3.</span> <span class="nav-text">对付啰嗦</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#第五次尝试：使用匿名类"><span class="nav-number">3.1.</span> <span class="nav-text">第五次尝试：使用匿名类</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#第六次尝试：使用Lambda表达式"><span class="nav-number">3.2.</span> <span class="nav-text">第六次尝试：使用Lambda表达式</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#第七次尝试：将-List-类型抽象化"><span class="nav-number">3.3.</span> <span class="nav-text">第七次尝试：将 List 类型抽象化</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#总结"><span class="nav-number">4.</span> <span class="nav-text">总结</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2018</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">mascot</span>
+
+  
+</div>
+
+
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Gemini</a> v5.1.4</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
