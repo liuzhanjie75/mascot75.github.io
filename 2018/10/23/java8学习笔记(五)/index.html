@@ -79,18 +79,18 @@
 
 
 
-<meta name="description" content="这篇简单的介绍流  集合是 Java 中使用最多的 API 。几乎每个 Java 应用都会制造和处理集合，但集合操作却算不上完美。为了让程序员活得更轻松，Java 语言设计者提供一种新的方式，那就是流。 什么是流流是 Java API 的新成员，它允许你以声明式的方式处理集合（通过查询语句来表达，而不是临时编写一个实现）。你可以把它们看成遍历数据集合的高级迭代，而且流是可以透明的并行处理，你无需">
+<meta name="description" content="这篇简单的介绍流  集合是 Java 中使用最多的 API 。几乎每个 Java 应用都会制造和处理集合，但集合操作却算不上完美。为了让程序员活得更轻松，Java 语言设计者提供一种新的方式，那就是流。">
 <meta name="keywords" content="-java -函数式">
 <meta property="og:type" content="article">
-<meta property="og:title" content="java学习笔记（五）—— 流">
+<meta property="og:title" content="java学习笔记(五)">
 <meta property="og:url" content="http://yoursite.com/2018/10/23/java8学习笔记(五)/index.html">
 <meta property="og:site_name" content="Hexo">
-<meta property="og:description" content="这篇简单的介绍流  集合是 Java 中使用最多的 API 。几乎每个 Java 应用都会制造和处理集合，但集合操作却算不上完美。为了让程序员活得更轻松，Java 语言设计者提供一种新的方式，那就是流。 什么是流流是 Java API 的新成员，它允许你以声明式的方式处理集合（通过查询语句来表达，而不是临时编写一个实现）。你可以把它们看成遍历数据集合的高级迭代，而且流是可以透明的并行处理，你无需">
+<meta property="og:description" content="这篇简单的介绍流  集合是 Java 中使用最多的 API 。几乎每个 Java 应用都会制造和处理集合，但集合操作却算不上完美。为了让程序员活得更轻松，Java 语言设计者提供一种新的方式，那就是流。">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2018-10-28T15:01:46.288Z">
+<meta property="og:updated_time" content="2018-11-02T10:42:26.875Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="java学习笔记（五）—— 流">
-<meta name="twitter:description" content="这篇简单的介绍流  集合是 Java 中使用最多的 API 。几乎每个 Java 应用都会制造和处理集合，但集合操作却算不上完美。为了让程序员活得更轻松，Java 语言设计者提供一种新的方式，那就是流。 什么是流流是 Java API 的新成员，它允许你以声明式的方式处理集合（通过查询语句来表达，而不是临时编写一个实现）。你可以把它们看成遍历数据集合的高级迭代，而且流是可以透明的并行处理，你无需">
+<meta name="twitter:title" content="java学习笔记(五)">
+<meta name="twitter:description" content="这篇简单的介绍流  集合是 Java 中使用最多的 API 。几乎每个 Java 应用都会制造和处理集合，但集合操作却算不上完美。为了让程序员活得更轻松，Java 语言设计者提供一种新的方式，那就是流。">
 
 
 
@@ -126,7 +126,7 @@
 
 
 
-  <title>java学习笔记（五）—— 流 | Hexo</title>
+  <title>java学习笔记(五) | Hexo</title>
   
 
 
@@ -290,7 +290,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">java学习笔记（五）—— 流</h1>
+          <h1 class="post-title" itemprop="name headline">java学习笔记(五)</h1>
         
 
         <div class="post-meta">
@@ -366,6 +366,7 @@
 <p>这篇简单的介绍流</p>
 </blockquote>
 <p>集合是 Java 中使用最多的 API 。几乎每个 Java 应用都会制造和处理集合，但集合操作却算不上完美。为了让程序员活得更轻松，Java 语言设计者提供一种新的方式，那就是流。</p>
+ <a id="more"></a>
 <h2 id="什么是流"><a href="#什么是流" class="headerlink" title="什么是流"></a>什么是流</h2><p>流是 Java API 的新成员，它允许你以声明式的方式处理集合（通过查询语句来表达，而不是临时编写一个实现）。你可以把它们看成遍历数据集合的高级迭代，而且流是可以透明的并行处理，你无需写任何多线程代码。下面两段代码都是用来返回低热量的菜肴名称，并按卡路里排序，一个是 Java7 写的，另一个是 Java8 的流写的。</p>
 <p>Java7：</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">List&lt;Dish&gt; lowCaloricDishes = <span class="keyword">new</span> ArrayList&lt;&gt;();</span><br><span class="line"><span class="keyword">for</span> (Dish d : menu) &#123;</span><br><span class="line">    <span class="keyword">if</span> (d.getCalories() &lt; <span class="number">400</span>) &#123;</span><br><span class="line">        lowCaloric.add(d);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">Collections.sort(lowCaloricDishes. <span class="keyword">new</span> Comparator()&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">compare</span><span class="params">(Dish d1, Dish d2)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> Integer.compare(d1.getCalories(), d2.getCalories());</span><br><span class="line">    &#125;</span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line">List&lt;String&gt; lowCaloricDishesName = <span class="keyword">new</span> ArrayList&lt;&gt;();</span><br><span class="line"><span class="keyword">for</span> (Dish d : lowCaloricDishes) &#123;</span><br><span class="line">    lowCaloricDishesName.add(d.getName());</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
@@ -405,8 +406,59 @@
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">List&lt;String&gt; threeHighCaloricDishName = </span><br><span class="line">    menu.stream()			<span class="comment">//从menu获得流	</span></span><br><span class="line">    	.filter(d -&gt; d.getCalores() &gt; <span class="number">300</span>)	<span class="comment">//建立操作流水线：首先选出高热量的菜肴</span></span><br><span class="line">    	.map(Dish::getName)		<span class="comment">//获取菜名</span></span><br><span class="line">    	.limit(<span class="number">3</span>)			   <span class="comment">//只需按着前三个</span></span><br><span class="line">    	.collect(toList());	    <span class="comment">//将结果保留到另一个集合中</span></span><br><span class="line">System.out.println(threeHighCaloricDishName);</span><br></pre></td></tr></table></figure>
 <p>简单的介绍上面的各种流的操作：</p>
 <ul>
-<li>filter —— 接受 Lambda ，从流中排除某些元素。通过传递 Lambda d -&gt; d.getCalories() &gt; 300，选择出热量超过 300 卡路里的菜肴。</li>
-<li></li>
+<li>filter —— 接受 Lambda ，从流中排除某些元素。在本例中，通过传递 Lambda d -&gt; d.getCalories() &gt; 300，选择出热量超过 300 卡路里的菜肴。</li>
+<li>map —— 接受一个 Lambda ，将元素转化为其他形式或提取信息。在本例中，通过传递方法引用 Dish::getName，相当于 Lambda d -&gt; d.getName()，提取每一道菜名。</li>
+<li>limit  —— 截断流，时期元素不超过给定的数量。</li>
+<li>collect —— 将流转化为其他形式。本例中，将流转化为一个列表。</li>
+</ul>
+<h2 id="流与集合"><a href="#流与集合" class="headerlink" title="流与集合"></a>流与集合</h2><p>Java 现有的集合概念和新的流的概念都提供了接口，来配合表达元素类型和有序值的数据接口。所谓有序，就是按顺序去所用值，而不是随机取用。</p>
+<p>粗略地说，流与集合的差异在于什么时候计算。集合是一个内存中的数据结构，它包含数据结构目前所有值–集合的每个元素都得先算出来才能添加到集合中。</p>
+<p>相比之下，流则在概念上是固定的数据结构（你不能添加和删除元素），其他元素则是按需计算。</p>
+<h3 id="只能遍历一次"><a href="#只能遍历一次" class="headerlink" title="只能遍历一次"></a>只能遍历一次</h3><p>和迭代器类似，流只能遍历一次。遍历完之后，这个流就已经被消费了。你可以从数据源从新获取再次遍历，就像迭代器一样。例如：下面代码就会抛出异常。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">List&lt;String&gt; title = Arrays.asList(<span class="string">"Java8"</span>, <span class="string">"in"</span>, <span class="string">"action"</span>);</span><br><span class="line">Stream&lt;String&gt; s = title.stream();</span><br><span class="line">s.forEach(System.out::println);</span><br><span class="line"><span class="comment">//这句话会报异常，应为流已被操作</span></span><br><span class="line">s.forEach(System.out::println);</span><br></pre></td></tr></table></figure>
+<p>所以务必记住，留着能被消费一次。</p>
+<h3 id="外部迭代和内部迭代"><a href="#外部迭代和内部迭代" class="headerlink" title="外部迭代和内部迭代"></a>外部迭代和内部迭代</h3><p>使用 collection 接口需要用户自己去迭代（如 for-each），则成为外部迭代。相反，流使用内部迭代 —— 它帮你迭代。下面代码说明区别：</p>
+<p>集合：用 for-each外部迭代</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">List&lt;String&gt; names = <span class="keyword">new</span> ArrayList&lt;&gt;();</span><br><span class="line"><span class="keyword">for</span> (Dish d : menu) &#123;</span><br><span class="line">    names.add(d.getName());</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>集合：用背后的迭代器迭代</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">List&lt;String&gt; names = <span class="keyword">new</span> ArrayLsit&lt;&gt;();</span><br><span class="line">Iterator&lt;Dish&gt; iterator = menu.iterator();</span><br><span class="line"><span class="keyword">while</span> (iterator.hasNext()) &#123;</span><br><span class="line">    Dish d = iterator.next();</span><br><span class="line">    names.add(d.getName());</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>流：内部迭代</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">List&lt;String&gt; names = menu.stream().map(Dish::getName()).collect(toList());</span><br></pre></td></tr></table></figure>
+<h2 id="流操作"><a href="#流操作" class="headerlink" title="流操作"></a>流操作</h2><p>Stream 接口定义了 许多操作，基本可以分为两大类操作：</p>
+<ul>
+<li>例如：filter 、map 和 limit 等方法，可以形成流水线的中间操作。</li>
+<li>例如：collection  触发流水线执行关闭的终端操作。</li>
+</ul>
+<h3 id="中间操作"><a href="#中间操作" class="headerlink" title="中间操作"></a>中间操作</h3><p>像 filter 和 map 等中间操作会返回另一个流，这让可以让多个操作连接在一起形成一个查询。除非执行一个终端操作，否则中间操作不会正真执行 —— 他们都是延时执行的。这是因为中间操作一般都可以合并起来，在终端操作中一起执行。</p>
+<p>你可以修改代码，做一下尝试：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">List&lt;String&gt; names = </span><br><span class="line">    menu.stream()</span><br><span class="line">    .filter(d -&gt; &#123;</span><br><span class="line">        System.out.println(<span class="string">"filtering: "</span> + d.getName());</span><br><span class="line">        <span class="keyword">return</span> d.getCalories() &gt; <span class="number">300</span>;</span><br><span class="line">    &#125;)</span><br><span class="line">    .map(d -&gt; &#123;</span><br><span class="line">        System.out.println(<span class="string">"mappong: "</span> + d.getName());</span><br><span class="line">        <span class="keyword">return</span> d.getName();</span><br><span class="line">    &#125;)</span><br><span class="line">    .limit(<span class="number">3</span>);</span><br><span class="line">    .collect(toList());</span><br><span class="line"><span class="comment">//打印结果菜名</span></span><br><span class="line">System.out.println(names);</span><br></pre></td></tr></table></figure>
+<p>你会得到如下结果：</p>
+<blockquote>
+<p>filtering pork</p>
+<p>mapping pork</p>
+<p>filtering beef</p>
+<p>mapping beef</p>
+<p>filtering chicken </p>
+<p>mapping chicken</p>
+<p>[pork, beef, chicken]</p>
+</blockquote>
+<p>有些操作就是利用了流的这种延时性质。尽管 filter 和 map 是个两个独立的操作，但是它们被合并到同一次遍历中（这种技术叫循环合并）。</p>
+<h3 id="终端操作"><a href="#终端操作" class="headerlink" title="终端操作"></a>终端操作</h3><p>终端操作会从流水线中生成结果，结果是一个非流值。比如List 、Integer，甚至是 void 。例如：下面这个 forEach 操作就返回一个 void 的终端操作。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">menu.stream().forEach(System.out::println);</span><br></pre></td></tr></table></figure>
+<h3 id="使用流"><a href="#使用流" class="headerlink" title="使用流"></a>使用流</h3><p>总而言之，流的使用一般包括三件事：</p>
+<ul>
+<li>一个数据源（如集合）来执行一个查询。</li>
+<li>一个中间链操作，形成一条流水线。</li>
+<li>一个终端操作，执行流水线，并能生成结果 。</li>
+</ul>
+<p>流的流水线背后的理念类似于构建器模式。在构建器模式中有一条调用连用来设置一套配置（流的中间链），接着调用 build 方法（流的终端操作）。</p>
+<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><ul>
+<li>流是“从支持数据处理操作的源生成的一系列的元素”。</li>
+<li>流是内部迭代：迭代通过 filter 、map 、sorted等操作被抽象掉了。</li>
+<li>流的操作有两类：中间操作和终端操作。</li>
+<li>filter 和 map 等中间操作会返回一个流，并可以连接在一起，形成一条流水线，但不会产生任何结果。</li>
+<li>forEach 和 count 等终端操作会返回一个非流值，并处理流水线以返回结果。</li>
+<li>流中的元素是按需计算的。</li>
 </ul>
 
       
@@ -447,6 +499,10 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2018/11/01/java8学习笔记(六)/" rel="prev" title="java8学习笔记(六)">
+                java8学习笔记(六) <i class="fa fa-chevron-right"></i>
+              </a>
             
           </div>
         </div>
@@ -523,7 +579,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">6</span>
+                  <span class="site-state-item-count">7</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -594,7 +650,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#什么是流"><span class="nav-number">1.</span> <span class="nav-text">什么是流</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#流简介"><span class="nav-number">2.</span> <span class="nav-text">流简介</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#什么是流"><span class="nav-number">1.</span> <span class="nav-text">什么是流</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#流简介"><span class="nav-number">2.</span> <span class="nav-text">流简介</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#流与集合"><span class="nav-number">3.</span> <span class="nav-text">流与集合</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#只能遍历一次"><span class="nav-number">3.1.</span> <span class="nav-text">只能遍历一次</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#外部迭代和内部迭代"><span class="nav-number">3.2.</span> <span class="nav-text">外部迭代和内部迭代</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#流操作"><span class="nav-number">4.</span> <span class="nav-text">流操作</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#中间操作"><span class="nav-number">4.1.</span> <span class="nav-text">中间操作</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#终端操作"><span class="nav-number">4.2.</span> <span class="nav-text">终端操作</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#使用流"><span class="nav-number">4.3.</span> <span class="nav-text">使用流</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#总结"><span class="nav-number">5.</span> <span class="nav-text">总结</span></a></li></ol></div>
             
 
           </div>
